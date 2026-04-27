@@ -73,8 +73,8 @@ The following directories are **not committed** to GitHub (size or regenerable):
 
 ```bash
 # Recommended: conda env with Python 3.11 or 3.12
-conda create -n msba python=3.12
-conda activate msba
+conda create -n bt5153 python=3.12
+conda activate bt5153
 pip install -r requirements.txt
 ```
 
