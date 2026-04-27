@@ -1,0 +1,5 @@
+model,queries,runtime_s,s_per_query
+TF-IDF,823,2.04,0.0025
+SBERT,823,15.16,0.0184
+SPLADE,823,491.05,0.5967
+FAISS,823,13.73,0.0167

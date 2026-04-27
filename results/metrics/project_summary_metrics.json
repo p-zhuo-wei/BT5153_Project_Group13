@@ -1,0 +1,379 @@
+{
+  "model_comparison_main": [
+    {
+      "model": "TF-IDF baseline",
+      "evaluation_scope": "Full held-out test split",
+      "query_count": 823,
+      "precision@10": 0.0391251518833535,
+      "mrr": 0.1409499268467987,
+      "ndcg@10": 0.1323226964800668,
+      "map": 0.1077232403860967
+    },
+    {
+      "model": "SBERT",
+      "evaluation_scope": "Full held-out test split",
+      "query_count": 823,
+      "precision@10": 0.028797083839611184,
+      "mrr": 0.11027989722908313,
+      "ndcg@10": 0.09993305580608867,
+      "map": 0.08327622268126247
+    },
+    {
+      "model": "FAISS (SBERT+IndexFlatIP)",
+      "evaluation_scope": "Full held-out test split",
+      "query_count": 823,
+      "precision@10": 0.028797083839611184,
+      "mrr": 0.09837991089509923,
+      "ndcg@10": 0.09993305580608867,
+      "map": 0.0669938882352815
+    },
+    {
+      "model": "LLM reranker",
+      "evaluation_scope": "Held-out 100-job test subset",
+      "query_count": 100,
+      "precision@10": 0.037,
+      "mrr": 0.144706973488803,
+      "ndcg@10": 0.12432360917132375,
+      "map": 0.11746551999101319
+    }
+  ],
+  "model_comparison_matched_subset": [
+    {
+      "model": "TF-IDF baseline",
+      "query_count": 100,
+      "precision@10": 0.04699999999999999,
+      "mrr": 0.15999561746436647,
+      "ndcg@10": 0.14335962846140582,
+      "map": 0.11777534029289173
+    },
+    {
+      "model": "SBERT",
+      "query_count": 100,
+      "precision@10": 0.030000000000000006,
+      "mrr": 0.13530415082034172,
+      "ndcg@10": 0.10981412747180347,
+      "map": 0.08646998112861304
+    },
+    {
+      "model": "Cross-Encoder (rerank SBERT top-50)",
+      "query_count": 100,
+      "precision@10": 0.034,
+      "mrr": 0.12037301587301588,
+      "ndcg@10": 0.11138316081072239,
+      "map": 0.0707936507936508
+    },
+    {
+      "model": "LLM reranker",
+      "query_count": 100,
+      "precision@10": 0.037,
+      "mrr": 0.144706973488803,
+      "ndcg@10": 0.12432360917132375,
+      "map": 0.11746551999101319
+    }
+  ],
+  "significance_full_test": [
+    {
+      "metric": "precision@10",
+      "query_count": 823,
+      "observed_delta": 0.010328068043742407,
+      "ci_lower": 0.006682867557715674,
+      "ci_upper": 0.014216281895504255,
+      "p_value": 0.0,
+      "comparison": "TF-IDF baseline - SBERT"
+    },
+    {
+      "metric": "mrr",
+      "query_count": 823,
+      "observed_delta": 0.030670029617715627,
+      "ci_lower": 0.013813233455454113,
+      "ci_upper": 0.04769905615551608,
+      "p_value": 0.0004,
+      "comparison": "TF-IDF baseline - SBERT"
+    },
+    {
+      "metric": "ndcg@10",
+      "query_count": 823,
+      "observed_delta": 0.03238964067397818,
+      "ci_lower": 0.017347634784520352,
+      "ci_upper": 0.04847539297420998,
+      "p_value": 0.0,
+      "comparison": "TF-IDF baseline - SBERT"
+    }
+  ],
+  "significance_matched_subset": [
+    {
+      "comparison": "TF-IDF baseline - SBERT",
+      "metric": "precision@10",
+      "query_count": 100,
+      "observed_delta": 0.017000000000000005,
+      "ci_lower": 0.004000000000000001,
+      "ci_upper": 0.032,
+      "p_value": 0.0056
+    },
+    {
+      "comparison": "TF-IDF baseline - SBERT",
+      "metric": "mrr",
+      "query_count": 100,
+      "observed_delta": 0.024691466644024725,
+      "ci_lower": -0.033023706669867814,
+      "ci_upper": 0.08263252333536539,
+      "p_value": 0.3968
+    },
+    {
+      "comparison": "TF-IDF baseline - SBERT",
+      "metric": "ndcg@10",
+      "query_count": 100,
+      "observed_delta": 0.03354550098960233,
+      "ci_lower": -0.01510579148827444,
+      "ci_upper": 0.08414269061219415,
+      "p_value": 0.1812
+    },
+    {
+      "comparison": "TF-IDF baseline - LLM reranker",
+      "metric": "precision@10",
+      "query_count": 100,
+      "observed_delta": 0.01,
+      "ci_lower": 0.0030000000000000005,
+      "ci_upper": 0.017,
+      "p_value": 0.0056
+    },
+    {
+      "comparison": "TF-IDF baseline - LLM reranker",
+      "metric": "mrr",
+      "query_count": 100,
+      "observed_delta": 0.015288643975563464,
+      "ci_lower": -0.035265977465087375,
+      "ci_upper": 0.06700624330842,
+      "p_value": 0.5556
+    },
+    {
+      "comparison": "TF-IDF baseline - LLM reranker",
+      "metric": "ndcg@10",
+      "query_count": 100,
+      "observed_delta": 0.019036019290082057,
+      "ci_lower": -0.021550097533922098,
+      "ci_upper": 0.05929686694416896,
+      "p_value": 0.3592
+    },
+    {
+      "comparison": "SBERT - LLM reranker",
+      "metric": "precision@10",
+      "query_count": 100,
+      "observed_delta": -0.007000000000000001,
+      "ci_lower": -0.021,
+      "ci_upper": 0.006,
+      "p_value": 0.3424
+    },
+    {
+      "comparison": "SBERT - LLM reranker",
+      "metric": "mrr",
+      "query_count": 100,
+      "observed_delta": -0.009402822668461253,
+      "ci_lower": -0.07333858351151334,
+      "ci_upper": 0.05617943395839773,
+      "p_value": 0.7836
+    },
+    {
+      "comparison": "SBERT - LLM reranker",
+      "metric": "ndcg@10",
+      "query_count": 100,
+      "observed_delta": -0.01450948169952028,
+      "ci_lower": -0.06383701443283903,
+      "ci_upper": 0.03441105887058471,
+      "p_value": 0.5724
+    },
+    {
+      "comparison": "SBERT - Cross-Encoder",
+      "metric": "precision@10",
+      "query_count": 100,
+      "observed_delta": -0.004,
+      "ci_lower": -0.012000000000000002,
+      "ci_upper": 0.0030000000000000005,
+      "p_value": 0.348
+    },
+    {
+      "comparison": "SBERT - Cross-Encoder",
+      "metric": "mrr",
+      "query_count": 100,
+      "observed_delta": 0.014931134947325857,
+      "ci_lower": -0.023914942819891215,
+      "ci_upper": 0.05805682323760234,
+      "p_value": 0.4612
+    },
+    {
+      "comparison": "SBERT - Cross-Encoder",
+      "metric": "ndcg@10",
+      "query_count": 100,
+      "observed_delta": -0.0015690333389188882,
+      "ci_lower": -0.03216755210590824,
+      "ci_upper": 0.034131856037431324,
+      "p_value": 0.9
+    },
+    {
+      "comparison": "Cross-Encoder - LLM reranker",
+      "metric": "precision@10",
+      "query_count": 100,
+      "observed_delta": -0.002999999999999999,
+      "ci_lower": -0.016,
+      "ci_upper": 0.008,
+      "p_value": 0.6876
+    },
+    {
+      "comparison": "Cross-Encoder - LLM reranker",
+      "metric": "mrr",
+      "query_count": 100,
+      "observed_delta": -0.024333957615787112,
+      "ci_lower": -0.08860542860443749,
+      "ci_upper": 0.03580508033479224,
+      "p_value": 0.456
+    },
+    {
+      "comparison": "Cross-Encoder - LLM reranker",
+      "metric": "ndcg@10",
+      "query_count": 100,
+      "observed_delta": -0.01294044836060139,
+      "ci_lower": -0.06273763728099474,
+      "ci_upper": 0.0345827880970357,
+      "p_value": 0.618
+    }
+  ],
+  "runtime_cost": [
+    {
+      "model": "TF-IDF baseline",
+      "query_count": 823,
+      "wall_clock_seconds": 2.0355124159978004,
+      "avg_seconds_per_query": 0.0024732836160362096
+    },
+    {
+      "model": "SBERT",
+      "query_count": 823,
+      "wall_clock_seconds": 15.158127709000837,
+      "avg_seconds_per_query": 0.01841813816403504
+    },
+    {
+      "model": "LLM reranker",
+      "query_count": 100,
+      "wall_clock_seconds": 3555.2581574970827,
+      "avg_seconds_per_query": 35.55258157497083
+    }
+  ],
+  "fairness_overview": [
+    {
+      "model": "TFIDF",
+      "perturbation": "gender_feminine",
+      "top1_change_rate": 0.0,
+      "top10_overlap": 1.0,
+      "mean_spearman": 0.9999731092436974,
+      "mean_rank_displacement": 0.011200000000000002
+    },
+    {
+      "model": "TFIDF",
+      "perturbation": "gender_masculine",
+      "top1_change_rate": 0.0,
+      "top10_overlap": 1.0,
+      "mean_spearman": 0.9996043217286913,
+      "mean_rank_displacement": 0.07520000000000002
+    },
+    {
+      "model": "TFIDF",
+      "perturbation": "name_white_american",
+      "top1_change_rate": 0.04,
+      "top10_overlap": 0.996,
+      "mean_spearman": 0.999684993997599,
+      "mean_rank_displacement": 0.1104
+    },
+    {
+      "model": "TFIDF",
+      "perturbation": "name_african_american",
+      "top1_change_rate": 0.04,
+      "top10_overlap": 0.992,
+      "mean_spearman": 0.9995889555822327,
+      "mean_rank_displacement": 0.136
+    },
+    {
+      "model": "TFIDF",
+      "perturbation": "name_south_asian",
+      "top1_change_rate": 0.04,
+      "top10_overlap": 0.996,
+      "mean_spearman": 0.9996235294117646,
+      "mean_rank_displacement": 0.1216
+    },
+    {
+      "model": "TFIDF",
+      "perturbation": "name_east_asian",
+      "top1_change_rate": 0.04,
+      "top10_overlap": 0.996,
+      "mean_spearman": 0.999684993997599,
+      "mean_rank_displacement": 0.10240000000000002
+    },
+    {
+      "model": "TFIDF",
+      "perturbation": "age_reduced",
+      "top1_change_rate": 0.0,
+      "top10_overlap": 0.98,
+      "mean_spearman": 0.9950713085234093,
+      "mean_rank_displacement": 0.6704000000000001
+    },
+    {
+      "model": "SBERT",
+      "perturbation": "gender_feminine",
+      "top1_change_rate": 0.0,
+      "top10_overlap": 1.0,
+      "mean_spearman": 0.9999692677070827,
+      "mean_rank_displacement": 0.008
+    },
+    {
+      "model": "SBERT",
+      "perturbation": "gender_masculine",
+      "top1_change_rate": 0.0,
+      "top10_overlap": 0.9880000000000001,
+      "mean_spearman": 0.9983635054021608,
+      "mean_rank_displacement": 0.34240000000000004
+    },
+    {
+      "model": "SBERT",
+      "perturbation": "name_white_american",
+      "top1_change_rate": 0.32,
+      "top10_overlap": 0.848,
+      "mean_spearman": 0.938212725090036,
+      "mean_rank_displacement": 3.6704000000000003
+    },
+    {
+      "model": "SBERT",
+      "perturbation": "name_african_american",
+      "top1_change_rate": 0.24,
+      "top10_overlap": 0.8320000000000001,
+      "mean_spearman": 0.9261925570228091,
+      "mean_rank_displacement": 3.9248000000000003
+    },
+    {
+      "model": "SBERT",
+      "perturbation": "name_south_asian",
+      "top1_change_rate": 0.36,
+      "top10_overlap": 0.816,
+      "mean_spearman": 0.919393037214886,
+      "mean_rank_displacement": 4.2063999999999995
+    },
+    {
+      "model": "SBERT",
+      "perturbation": "name_east_asian",
+      "top1_change_rate": 0.44,
+      "top10_overlap": 0.816,
+      "mean_spearman": 0.920203601440576,
+      "mean_rank_displacement": 4.0352
+    },
+    {
+      "model": "SBERT",
+      "perturbation": "age_reduced",
+      "top1_change_rate": 0.2,
+      "top10_overlap": 0.9279999999999998,
+      "mean_spearman": 0.9828821128451379,
+      "mean_rank_displacement": 1.7376000000000003
+    }
+  ],
+  "limitations": [
+    "The relevance labels are heuristic and not manually validated by recruiters.",
+    "The fairness section should be read as a perturbation-based stability check rather than a full fairness certification exercise.",
+    "The LLM reranker is evaluated on a held-out 100-job subset rather than the full held-out test split."
+  ]
+}

@@ -1,0 +1,38 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environments
+.env
+.venv/
+venv/
+
+# Tooling caches
+.claude/
+.deepeval/
+
+# Data — too large for GitHub; document regeneration in README
+data/raw/
+data/processed/
+data/splits/
+
+# Generated cache / large artifacts
+results/embeddings/
+results/metrics_original/
+results/metrics/*_rankings.csv
+results/metrics/*_checkpoint_rankings_raw.csv
+
+# Archived monolithic notebook — not part of the current pipeline
+archived/
+
+# IDE
+.vscode/
+.idea/
