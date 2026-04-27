@@ -191,4 +191,4 @@ Headline finding: **TF-IDF remains the strongest cheap baseline**, SPLADE is the
 
 ## Acknowledgements
 
-This project is the BT5153 Group 14 group project at NUS. The pipeline integrates open-source models from sentence-transformers, naver-labs (SPLADE), the cross-encoder MS MARCO collection, and Qwen-2.5-3B-Instruct via LM Studio.
+This project is the BT5153 Group 13 group project at NUS. The pipeline integrates open-source models from sentence-transformers, naver-labs (SPLADE), the cross-encoder MS MARCO collection, and Qwen-2.5-3B-Instruct via LM Studio.
