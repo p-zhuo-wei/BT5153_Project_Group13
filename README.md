@@ -1,4 +1,4 @@
-# BT5153 Group 14 — Resume-Job Matching as a Ranking Problem
+# BT5153 Group 13 — Resume-Job Matching as a Ranking Problem
 
 A two-stage retrieve-and-rerank pipeline for matching resumes to job postings. The full workflow lives in `overall.ipynb`, which orchestrates code from `src/` and `eval/` and produces every metric, figure, and comparison table in `results/`.
 
@@ -37,9 +37,6 @@ The two datasets are independent — they are not pre-matched resume-job pairs. 
 ├── README.md
 ├── walkthrough.md              # Narrated walkthrough of the workflow
 ├── requirements.txt
-├── report13.pdf                # Final report
-├── presentation13.pptx         # Final presentation
-├── Project Proposal.pdf
 ├── src/                        # Modular pipeline code
 │   ├── config.py               # Paths, seeds, model names, runtime flags
 │   ├── data_loader.py          # Split loading, ranking utilities, label attachment
@@ -118,7 +115,7 @@ Run order matches notebook section numbering:
 | 4 | SPLADE pipeline: stage 1 + CE + LLM (subset) | ~1.7 hr |
 | 5 | FAISS pipeline (stage 1 only) | seconds |
 | 6 | 3×3 grid summary table + bar plot | seconds |
-| 7 | Fairness audit (TF-IDF + SBERT, validation split) | ~1 min |
+| 7 | Fairness audit (TF-IDF + SBERT + SPLADE, validation split) | ~1 min |
 | 8 | Runtime breakdown (stage 1, stage 1+2 pipelines) | seconds |
 
 A full cold run on an M1 (8 GB) Mac with the LLM cells active takes roughly **5-6 hours**, dominated by the three LLM rerank cells (~50 min each). Warm reruns load from cached CSVs and complete in seconds.
@@ -170,17 +167,16 @@ Headline finding: **TF-IDF remains the strongest cheap baseline**, SPLADE is the
 - Relevance labels are heuristic proxies, not recruiter judgements. The full-test results should be read as a comparative benchmark under weak supervision rather than a hiring-quality estimate.
 - Stage-2 rerankers are evaluated on the matched 100-query stratified subset due to LLM compute cost on a single laptop. The subset preserves full-test category distribution within ±5%.
 - The LLM was originally configured with `gemma-4-e2b`. That model is reasoning-native and consumed all output tokens on chain-of-thought, leaving no content — every response fell through to the lexical fallback parser. The project switched to `qwen2.5-3b-instruct` (non-reasoning) which produces parseable JSON directly. Cached LLM artifacts in this repository are from the Qwen run.
-- The fairness audit covers TF-IDF and SBERT only (val split with 7 demographic perturbations). LLM and CE fairness are not audited — adding them is left for future work.
+- The fairness audit covers TF-IDF, SBERT, and SPLADE (val split with 7 demographic perturbations). LLM and CE fairness are not audited — adding them is left for future work.
 - The proposal targets (P@10 ≥ 0.80, MRR ≥ 0.70) were not met. The conservative recommendation is to keep TF-IDF as the production default and treat rerankers as optional augmentations under operational-cost constraints.
 
 ## How to read the results
 
 - **`results/metrics/grid_3x3_summary.json`** — top-level scorecard for all 9 grid cells
 - **`results/tables/grid_3x3_comparison.csv`** — same data in CSV form
-- **`results/tables/fairness_summary.csv`** — per-perturbation ranking-stability metrics for TF-IDF and SBERT
+- **`results/tables/fairness_summary.csv`** — per-perturbation ranking-stability metrics for TF-IDF, SBERT, and SPLADE
 - **`results/tables/runtime_stage1.csv`** + **`runtime_stage1_plus_stage2.csv`** — wall-clock and per-query latency for each pipeline
 - **`results/figures/grid_3x3_comparison.png`** — bar plot of all 9 cells
-- **`report13.pdf`** — narrative writeup
 - **`walkthrough.md`** — guided tour of the workflow
 
 ## References
