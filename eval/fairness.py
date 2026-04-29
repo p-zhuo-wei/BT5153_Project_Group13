@@ -16,6 +16,7 @@ from src.data_loader import (
 )
 from src.stage_1_tfidf import rank_with_tfidf
 from src.stage_1_sbert import NotebookSBERTMatcher, rank_with_sbert
+from src.stage_1_splade import SPLADEVectorizer, rank_with_splade
 
 
 # Perturbation dictionaries and text-edit helpers for the fairness audit.
@@ -151,13 +152,17 @@ def run_fairness_audit(split_frame: pd.DataFrame, model_name: str) -> tuple[pd.D
     perturbations = build_perturbation_specs()
 
     fairness_matcher = None
+    fairness_vectorizer = None
     if model_name == "tfidf":
         base_rankings, _ = rank_with_tfidf(queries, candidates, model_name="tfidf_fairness")
     elif model_name == "sbert":
         fairness_matcher = NotebookSBERTMatcher()  # load once, reuse for all perturbations
         base_rankings, _ = rank_with_sbert(queries, candidates, fairness_matcher, model_name="sbert_fairness")
+    elif model_name == "splade":
+        fairness_vectorizer = SPLADEVectorizer()  # load once, reuse for all perturbations
+        base_rankings, _ = rank_with_splade(queries, candidates, fairness_vectorizer, model_name="splade_fairness")
     else:
-        raise ValueError("Supported fairness models are 'tfidf' and 'sbert'.")
+        raise ValueError("Supported fairness models are 'tfidf', 'sbert', and 'splade'.")
 
     job_rows = []
     summary_rows = []
@@ -166,8 +171,10 @@ def run_fairness_audit(split_frame: pd.DataFrame, model_name: str) -> tuple[pd.D
         perturbed_candidates["resume_text"] = [perturbation_fn(text, row) for text, (_, row) in zip(perturbed_candidates["resume_text"].tolist(), perturbed_candidates.iterrows(), strict=False)]
         if model_name == "tfidf":
             perturbed_rankings, _ = rank_with_tfidf(queries, perturbed_candidates, model_name="tfidf_fairness")
-        else:
+        elif model_name == "sbert":
             perturbed_rankings, _ = rank_with_sbert(queries, perturbed_candidates, fairness_matcher, model_name="sbert_fairness")
+        else:
+            perturbed_rankings, _ = rank_with_splade(queries, perturbed_candidates, fairness_vectorizer, model_name="splade_fairness")
         comparison = compare_rankings(base_rankings, perturbed_rankings)
         comparison.insert(0, "perturbation", perturbation_name)
         comparison.insert(0, "model", model_name.upper())

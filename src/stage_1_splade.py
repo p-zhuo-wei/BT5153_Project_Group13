@@ -29,16 +29,16 @@ except ImportError:
     print("transformers not installed. Install with: pip install transformers")
 
 import os
+from dotenv import load_dotenv
 from huggingface_hub import login
 
-# SPLADE-v3 lives on a gated HF repo; auth via environment variable so no token
-# is ever committed. Reviewers run `huggingface-cli login` once on their machine
-# (writes ~/.cache/huggingface/token) OR export HF_TOKEN=<their-own-token>.
+# Load .env file
+load_dotenv()
+
 _HF_TOKEN = os.environ.get("HF_TOKEN") or os.environ.get("HUGGING_FACE_HUB_TOKEN")
+
 if _HF_TOKEN:
     login(_HF_TOKEN)
-# Otherwise huggingface_hub uses the cached token from `huggingface-cli login`,
-# which is the recommended path for local development.
 
 class SPLADEVectorizer:
     """Wraps a SPLADE model to produce sparse term-weight vectors."""
