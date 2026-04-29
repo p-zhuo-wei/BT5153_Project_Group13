@@ -23,7 +23,7 @@ Two public Kaggle datasets:
 
 | Dataset | Author | Source |
 |---------|--------|--------|
-| Resume Dataset | gauravduttakiit | [kaggle.com/datasets/gauravduttakiit/resume-dataset](https://www.kaggle.com/datasets/gauravduttakiit/resume-dataset) |
+| Resume Dataset | snehaanbhawa | [kaggle.com/datasets/snehaanbhawal/resume-dataset](https://www.kaggle.com/datasets/snehaanbhawal/resume-dataset?select=data) |
 | Real or Fake Job Posting Prediction | Shivam Bansal | [kaggle.com/datasets/shivamb/real-or-fake-fake-jobposting-prediction](https://www.kaggle.com/datasets/shivamb/real-or-fake-fake-jobposting-prediction) |
 
 The two datasets are independent — they are not pre-matched resume-job pairs. The project constructs proxy relevance labels from category and skill overlap (see "Labels" below).
