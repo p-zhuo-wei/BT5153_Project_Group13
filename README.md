@@ -80,7 +80,7 @@ pip install -r requirements.txt
 Place the two Kaggle CSVs at the expected paths:
 
 ```text
-data/raw/Resume/Resume.csv             # from gauravduttakiit's Resume Dataset
+data/raw/Resume/Resume.csv             # from snehaanbhawa's Resume Dataset
 data/raw/fake_job_postings.csv         # from shivamb's Real-or-Fake Job Postings
 ```
 
