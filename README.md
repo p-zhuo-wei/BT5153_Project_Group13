@@ -35,7 +35,6 @@ The two datasets are independent — they are not pre-matched resume-job pairs. 
 ├── overall.ipynb               # Main orchestrator — sections 0–8
 ├── checking.ipynb              # Diagnostic / sanity-check scratchpad
 ├── README.md
-├── walkthrough.md              # Narrated walkthrough of the workflow
 ├── requirements.txt
 ├── src/                        # Modular pipeline code
 │   ├── config.py               # Paths, seeds, model names, runtime flags
@@ -177,7 +176,6 @@ Headline finding: **TF-IDF remains the strongest cheap baseline**, SPLADE is the
 - **`results/tables/fairness_summary.csv`** — per-perturbation ranking-stability metrics for TF-IDF, SBERT, and SPLADE
 - **`results/tables/runtime_stage1.csv`** + **`runtime_stage1_plus_stage2.csv`** — wall-clock and per-query latency for each pipeline
 - **`results/figures/grid_3x3_comparison.png`** — bar plot of all 9 cells
-- **`walkthrough.md`** — guided tour of the workflow
 
 ## References
 
