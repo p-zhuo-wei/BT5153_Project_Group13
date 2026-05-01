@@ -15,7 +15,7 @@ Given a job posting and a pool of resumes, the system ranks stronger candidates 
   - **Cross-encoder** (`cross-encoder/ms-marco-MiniLM-L-6-v2`) — reranks top-50, returns top-10
   - **LLM** (`Qwen2.5-3B-Instruct` via LM Studio) — reranks top-20, returns top-10
 
-This produces a 3×3 grid of `{TF-IDF, SBERT, SPLADE} × {none, CE, LLM}` plus a separate FAISS row for retrieval comparison. The project compares these on ranking quality (P@10, MRR, MAP, nDCG@10), runtime cost, and ranking-stability fairness under demographic perturbations.
+This produces a 3×3 grid of `{TF-IDF, SBERT, SPLADE} × {none, CE, LLM}` plus a separate FAISS row for retrieval comparison. The project compares these on ranking quality (P@10, MRR, nDCG@10), runtime cost, and ranking-stability fairness under demographic perturbations.
 
 ## Data sources
 
@@ -48,7 +48,7 @@ The two datasets are independent — they are not pre-matched resume-job pairs. 
 │   ├── stage_2_ce_rerank.py    # Cross-encoder reranker
 │   └── stage_2_llm_rerank.py   # LLM reranker (LM Studio client)
 ├── eval/                       # Evaluation modules
-│   ├── metrics.py              # P@k, R@k, MRR, MAP, nDCG@k
+│   ├── metrics.py              # P@k, R@k, MRR, nDCG@k
 │   ├── evaluator.py            # Per-query + aggregate eval, paired bootstrap
 │   └── fairness.py             # Perturbation-based ranking-stability audit
 ├── results/
@@ -134,7 +134,7 @@ No publicly available, human-annotated English-language resume-job matching benc
 - **Label 1** — adjacent category, partial overlap (relevant)
 - **Label 0** — distant category, low overlap (not relevant)
 
-For evaluation, `precision@k` / `recall@k` / `MRR` / `MAP` treat both 1 and 2 as relevant (binary `positive_threshold=1`). `nDCG@k` uses the graded `2^rel - 1` gain so highly-relevant items contribute more.
+For evaluation, `precision@k` / `recall@k` / `MRR` treat both 1 and 2 as relevant (binary `positive_threshold=1`). `nDCG@k` uses the graded `2^rel - 1` gain so highly-relevant items contribute more.
 
 When a model surfaces a `(job, resume)` pair with no label in `data/splits/test.csv`, it is treated as relevance 0. Reported metrics are therefore conservative lower bounds — models that surface novel-but-genuinely-relevant candidates get penalised.
 
@@ -142,12 +142,12 @@ When a model surfaces a `(job, resume)` pair with no label in `data/splits/test.
 
 Stage-1 retrievers (full held-out test, 823 queries):
 
-| Model | P@10 | MRR | nDCG@10 | MAP |
-|-------|------|-----|---------|-----|
-| TF-IDF | 0.039 | 0.141 | 0.132 | 0.108 |
-| SBERT | 0.029 | 0.110 | 0.100 | 0.083 |
-| SPLADE | 0.044 | 0.155 | 0.158 | 0.124 |
-| FAISS (SBERT vectors) | 0.029 | 0.098 | 0.100 | 0.067 |
+| Model | P@10 | MRR | nDCG@10 |
+|-------|------|-----|---------|
+| TF-IDF | 0.039 | 0.141 | 0.132 |
+| SBERT | 0.029 | 0.110 | 0.100 |
+| SPLADE | 0.044 | 0.155 | 0.158 |
+| FAISS (SBERT vectors) | 0.029 | 0.098 | 0.100 |
 
 Stage-1 + Stage-2 pipelines (matched 100-query subset):
 
