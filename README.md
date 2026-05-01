@@ -177,12 +177,6 @@ Headline finding: **TF-IDF remains the strongest cheap baseline**, SPLADE is the
 - **`results/tables/runtime_stage1.csv`** + **`runtime_stage1_plus_stage2.csv`** — wall-clock and per-query latency for each pipeline
 - **`results/figures/grid_3x3_comparison.png`** — bar plot of all 9 cells
 
-## References
-
-- Yu et al., *ConFit: Confidence-aware Fine-tuning for Person-Job Fit*, ACM RecSys 2024
-- Brookings Institution, *Occupational matching and skill embeddings*, 2024
-- *ResumeAtlas: A large-scale resume benchmark*, ScienceDirect 2024
-
 ## Acknowledgements
 
 This project is the BT5153 Group 13 group project at NUS. The pipeline integrates open-source models from sentence-transformers, naver-labs (SPLADE), the cross-encoder MS MARCO collection, and Qwen-2.5-3B-Instruct via LM Studio.
