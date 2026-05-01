@@ -1,4 +1,4 @@
-# BT5153 Group 13 — Resume-Job Matching as a Ranking Problem
+# Resume-Job Matching
 
 A two-stage retrieve-and-rerank pipeline for matching resumes to job postings. The full workflow lives in `overall.ipynb`, which orchestrates code from `src/` and `eval/` and produces every metric, figure, and comparison table in `results/`.
 
